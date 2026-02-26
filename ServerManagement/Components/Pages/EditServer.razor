@@ -1,5 +1,7 @@
 ﻿@page "/servers/{id:int}"
 
+@inject NavigationManager NavigationManager
+
 <h3>EditServer</h3>
 <br />
 <br />
@@ -66,5 +68,7 @@
         {
             ServerRepository.UpdateServer(server.ServerId, server);
         }
+
+        NavigationManager.NavigateTo("/servers");
     }
 }
