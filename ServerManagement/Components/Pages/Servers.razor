@@ -33,9 +33,8 @@
 <br />
 
 <ul>
-    @foreach (var server in servers)
-    {
-        <li @key="server.ServerId">
+    <Virtualize Items="this.servers" Context="server">
+        <li>
             @server.Name in @server.City is 
             <span style="color:@((server.IsOnline ? "green" : "red"))">
                 @(server.IsOnline ? "online" : "offline")
@@ -51,7 +50,7 @@
             <button type="submit" class="btn btn-primary">Delete</button>
             </EditForm>
         </li>
-    }
+    </Virtualize>
 </ul>
 <p>
     <a href="/servers/add" class="btn btn-primary">Add Server</a>
