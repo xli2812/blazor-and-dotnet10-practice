@@ -26,7 +26,7 @@
 <br />
 
 <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Search Servers" @onchange="OnServerFilterChange" />
+    <input type="text" class="form-control" placeholder="Search Servers" @bind-value="serverFilter" />
     <button class="btn btn-outline-secondary" type="button" id="button-search" @onclick="OnSearch">Search</button>
 </div>
 
@@ -80,11 +80,6 @@
         this.selectedCity = cityName;
 
         this.servers = ServerRepository.GetServersByCity(this.selectedCity);
-    }
-
-    private void OnServerFilterChange(ChangeEventArgs args)
-    {
-        this.serverFilter = args.Value?.ToString() ?? string.Empty;
     }
 
     private void OnSearch()
