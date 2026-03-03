@@ -25,6 +25,13 @@
 
 <br />
 
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search Servers" @onchange="OnServerFilterChange" />
+    <button class="btn btn-outline-secondary" type="button" id="button-search" @onclick="OnSearch">Search</button>
+</div>
+
+<br />
+
 <ul>
     @foreach (var server in servers)
     {
@@ -57,6 +64,8 @@
 
     private string selectedCity = "Toronto";
 
+    private string serverFilter = string.Empty;
+
     private void DeleteServer(int serverId)
     {
         if (serverId > 0)
@@ -71,5 +80,17 @@
         this.selectedCity = cityName;
 
         this.servers = ServerRepository.GetServersByCity(this.selectedCity);
+    }
+
+    private void OnServerFilterChange(ChangeEventArgs args)
+    {
+        this.serverFilter = args.Value?.ToString() ?? string.Empty;
+    }
+
+    private void OnSearch()
+    {
+        this.servers = ServerRepository.SearchServers(this.serverFilter);
+
+        this.selectedCity = string.Empty;
     }
 }
